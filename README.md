@@ -5,7 +5,7 @@ Python client for Rejseplanens API
 ```
 import rejseplanen
 
-client = rejseplanen.CLIENT('username', 'password')
+client = rejseplanen.Client('username', 'password')
 
 client.location('elmegade 5 københavn')
 ```
