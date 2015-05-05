@@ -3,9 +3,9 @@ Python client for Rejseplanens API
 
 ## Usage
 ```
-import rejseplanen
+import journeyplanner
 
-client = rejseplanen.Client('username', 'password')
+client = journeyplanner.Client('username', 'password')
 
 client.location('elmegade 5 københavn')
 ```
