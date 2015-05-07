@@ -1,10 +1,10 @@
 from . import config
 
 def lat2y(latitude):
-    return int(latitude * COORDINATE_MULTIPLIER)
+    return int(latitude * config.COORDINATE_MULTIPLIER)
 
 def lon2x(longitude):
-    return int(longitude * COORDINATE_MULTIPLIER)
+    return int(longitude * config.COORDINATE_MULTIPLIER)
 
 def y2lat(y):
     return y / config.COORDINATE_MULTIPLIER
@@ -38,8 +38,8 @@ class Stop(Resource):
     def __init__(self, element):
         self.id = int(element.get('id'))
         self.name = element.get('name')
-        self.latitude = int(element.get('y')) / config.COORDINATE_MULTIPLIER
-        self.longitude = int(element.get('x')) / config.COORDINATE_MULTIPLIER
+        self.latitude = y2lat(int(element.get('y')))
+        self.longitude = x2lon(int(element.get('x')))
 
         try:
             self.distance = int(element.get('distance'))

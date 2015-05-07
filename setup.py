@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='journeyplanner',
-    version='0.1',
+    version='0.1.2',
     description='Journey Planner API client library',
     url='http://github.com/gisgroup/journeyplanner-python',
     author='Gis Group ApS',
