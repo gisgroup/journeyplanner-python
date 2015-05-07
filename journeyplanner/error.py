@@ -1,10 +1,10 @@
 """
-.exceptions
+.error
 ~~~~~~~~~~~~~~~~~~~
-This module contains the set of Rejseplanens exceptions.
+This module contains the set of Rejseplanens error.
 """
 
-def exception_from_message(message):
+def fromstring(message):
   """Convert a Rejseplanen API error message into an appropriate exception.
   """
   error_code = message.split()[0]
@@ -18,7 +18,7 @@ def exception_from_message(message):
   elif first_char == 'H':
     return TripServiceError(message)
   else:
-    raise JourneyPlannerException(message)
+    raise JourneyPlannerError(message)
 
 #-------------------------------------------------------------------------------
 
@@ -46,18 +46,22 @@ ERRORS = {
   'H895': 'Departure/Arrival are too near',
 }
 
-class JourneyPlannerException(Exception):
+class JourneyPlannerError(Exception):
   """There was an exception that occurred while handling your request."""
   pass
 
-class RestError(JourneyPlannerException):
+class AuthenticationError(JourneyPlannerError):
+    """Authentication failed."""
+    pass
+
+class RestError(JourneyPlannerError):
   """General rest error occured"""
   pass
 
-class ServerError(JourneyPlannerException):
+class ServerError(JourneyPlannerError):
   """Backend Server gave error"""
   pass
 
-class TripServiceError(JourneyPlannerException):
+class TripServiceError(JourneyPlannerError):
   """There was an error with your request"""
   pass

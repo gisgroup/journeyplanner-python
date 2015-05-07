@@ -1,11 +1,22 @@
 # rejseplanen-python
 Python client for Rejseplanens API
 
+## Installation
+    pip install journeyplanner
+
 ## Usage
 ```
-import journeyplanner
+from journeyplanner import JourneyPlanner
 
-client = journeyplanner.Client('username', 'password')
+client = JourneyPlanner()
 
 client.location('elmegade 5 københavn')
+```
+
+## Authentication
+```
+...
+client = JourneyPlanner()
+client.authenticate('USERNAME', 'PASSWORD')
+...
 ```

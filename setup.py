@@ -8,5 +8,6 @@ setup(
     author='Gis Group ApS',
     author_email='zacharias@gisgroup.dk',
     license='MIT',
-    packages=['journeyplanner']
+    packages=['journeyplanner'],
+    test_suite='test',
 )
