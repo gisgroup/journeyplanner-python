@@ -26,7 +26,6 @@ class Requester:
         querystring = urlencode(tuples)
 
         url = '{}/{}?{}'.format(self.baseurl, service, querystring)
-        print(url)
 
         try:
             response = self.opener.open(url)
@@ -46,6 +45,6 @@ def _parse(file):
         if errormessage:
             raise errorfromstring(errormessage)
 
-        return tree.getroot()
-    except ElementTree.ParseError as error:
+        return root
+    except ElementTree.ParseError:
         raise JourneyPlannerError('Invalid server response') from None
