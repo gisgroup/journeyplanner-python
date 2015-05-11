@@ -74,17 +74,18 @@ class Stop(Resource):
         except ValueError:
             self.distance = None
 
+
 class LegEndpoint(Resource):
     def __init__(self, element):
-        datetime = parsedatetime(element.get('rtDate'), element.get('time'))
-        realdatetime = parsedatetime(element.get('rtDate'), element.get('time'))
-        track = element.get('track')
-        realtrack = element.get('rtTrack')
+        try:
+            self.datetime = parsedatetime(element.get('rtDate'), element.get('rtTime'))
+        except:
+            self.datetime = parsedatetime(element.get('date'), element.get('time'))
 
         self.name = element.get('name')
         self.type = element.get('type')
-        self.datetime = realdatetime
-        self.track = track
+        self.track = element.get('track')
+        self.realtrack = element.get('rtTrack')
 
     @property
     def delayed(self):
@@ -115,6 +116,7 @@ class Leg(Resource):
         """Leg travel duration.
         """
         return self.destination.datetime - self.origin.datetime
+
 
 class Trip(Resource):
     def __init__(self, element):
