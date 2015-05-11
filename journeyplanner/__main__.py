@@ -15,10 +15,10 @@ parser_location.add_argument('query', type=str, help='the search query')
 parser_trip = subparsers.add_parser('trip', help='trip service')
 exorigin = parser_trip.add_mutually_exclusive_group(required=True)
 exorigin.add_argument('--originid', type=int, help='origin')
-exorigin.add_argument('--origin', nargs=2, type=int, metavar=('LATITUDE', 'LONGITUDE'))
+exorigin.add_argument('--origin', nargs=2, type=float, metavar=('LATITUDE', 'LONGITUDE'))
 exdest = parser_trip.add_mutually_exclusive_group(required=True)
 exdest.add_argument('--destinationid', type=int, help='destination')
-exdest.add_argument('--destination', nargs=2, type=int, metavar=('LATITUDE', 'LONGITUDE'))
+exdest.add_argument('--destination', nargs=2, type=float, metavar=('LATITUDE', 'LONGITUDE'))
 
 parser_stopsnearby = subparsers.add_parser('stopsnearby', help='stops nearby service')
 parser_stopsnearby.add_argument('latitude', type=float, help='latitude')
@@ -34,7 +34,7 @@ if args.service == 'location':
         print(str(x))
 
 if args.service == 'stopsnearby':
-    for x in jp.stopsnearby(latitude=args.latitude, longitude=args.longitude):
+    for x in jp.stopsnearby(latitude=args.latitude, longitude=args.longitude, radius=10000):
         print(str(x))
 
 if args.service == 'trip':

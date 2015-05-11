@@ -22,9 +22,11 @@ class Requester:
 
     def get(self, service, **params):
         tuples = sorted(params.items(), key=lambda x: x[0])
+        tuples = [t for t in tuples if t[1] is not None]
         querystring = urlencode(tuples)
 
         url = '{}/{}?{}'.format(self.baseurl, service, querystring)
+        print(url)
 
         try:
             response = self.opener.open(url)
@@ -32,7 +34,7 @@ class Requester:
             return _parse(response)
         except HTTPError as error:
             if error.code == 401:
-                raise AuthenticationError()
+                raise AuthenticationError('Invalid credentials')
 
 
 def _parse(file):
@@ -45,5 +47,5 @@ def _parse(file):
             raise errorfromstring(errormessage)
 
         return tree.getroot()
-    except:
-        raise JourneyPlannerError('Parse error')
+    except ElementTree.ParseError as error:
+        raise JourneyPlannerError('Invalid server response') from None

@@ -1,0 +1,64 @@
+JourneyPLanner
+==============
+
+Installation
+------------
+The journeyplanner library can be installed using pip:
+
+ $ pip install journeyplanner
+
+API reference
+-------------
+`statbank.data(tableid, variables=dict(), stream=False, descending=False, lang='da')`::
+Pulls data from a table and generates rows. Variables is a dictionary mapping variable codes to values. Streaming: Values must be chosen for all variables when streaming
+
+`statbank.subjects(subjects=None, recursive=False, include_tables=False, lang='da')`::
+List subjects from the subject hierarchy. If subjects is not given, the root subjects will be used.
+
+`statbank.tableinfo(tableid, lang='da')`::
+Fetch metadata for statbank table. Metadata includes information about variables, which can be used when extracting data.
+
+`statbank.tables(subjects=None, pastDays=None, include_inactive=False, lang='da'):`::
+Find tables placed under given subjects.
+
+Trip objects
+~~~~~~~~~~~~
+Trip instances have the following attributes:
+
+`Trip.legs`::
+  List of leg instances
+
+Leg objects
+~~~~~~~~~~~~
+Leg instances have the following attributes:
+
+`Leg.name`
+
+`Leg.type`
+
+`Leg.origin`
+
+`Leg.destination`
+
+`Leg.notes`
+
+
+Examples
+--------
+```
+from journeyplanner import JourneyPlanner, Endpoint
+
+client = JourneyPlanner()
+
+client.location('elmegade 5 københavn')
+
+origin = Endpoint(latitude=54.1337, longitude=11.9001, name='name')
+client.trip(origin, destination=42)
+```
+
+Authentication
+~~~~~~~~~~~~~~
+```
+client = JourneyPlanner()
+client.authenticate('USERNAME', 'PASSWORD')
+```

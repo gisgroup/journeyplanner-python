@@ -1,9 +1,3 @@
-"""
-.error
-~~~~~~~~~~~~~~~~~~~
-This module contains the set of Rejseplanens error.
-"""
-
 def fromstring(message):
   """Convert a Rejseplanen API error message into an appropriate exception.
   """
@@ -63,5 +57,5 @@ class ServerError(JourneyPlannerError):
   pass
 
 class TripServiceError(JourneyPlannerError):
-  """There was an error with your request"""
+  """There was an error with your trip request"""
   pass
